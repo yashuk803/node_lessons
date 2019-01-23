@@ -34,10 +34,15 @@ fs.appendFile('demo.txt', ' Hello World', function(err, data){
 
 var http = require('http');
 
-var app = http.createServer(function(req, res) {
-	res.write('Hello from Node.js');
-	res.end();
+http.createServer(function(req, res) {
+
+	if(req.url === '/contact') {
+		res.write('Ukranian');
+			res.end();
+	} else {
+		res.write('Hello');
+			res.end();
+	}
 }).listen(3000, function(){
 	console.log('Server at http://localhost:3000')
-	
 });
