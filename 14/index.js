@@ -71,3 +71,5 @@ var user = {
 
 
 emt.emit('myEvent', user);
+
+//JShint, code style google js
