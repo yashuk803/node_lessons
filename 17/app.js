@@ -27,11 +27,11 @@ app.get('/', function (req, res) {
 
 
 // Get all course
-app.get('/courses', function (req, res) {
+app.get('/api/courses', function (req, res) {
 	res.send(courses)
 })
 
-app.get('/courses/:id', function(req, res) {
+app.get('/api/courses/:id', function(req, res) {
 	
 	var course = courses.find(function(course) {
 		return course.id === parseInt(req.params.id);
@@ -40,14 +40,30 @@ app.get('/courses/:id', function(req, res) {
 	res.send(course);
 });
 
-app.post('/courses', function(req, res) {
+app.post('/api/courses', function(req, res) {
 		var course = {
-			id: Date.now(),
+			//id: Date.now(),
+			id: courses.length + 1,
 			name: req.body.name,
 		}
 		courses.push(course);
 		res.send(courses);
 
+})
+
+app.put('/api/courses/:id', function(req, res) {
+	var course = courses.find(function (course) {
+		return course.id === parseInt(req.params.id)
+	});
+	course.name = req.body.name;
+	res.send(course);
+})
+
+app.delete('/api/courses/:id', function(req, res) {
+	courses = courses.filter(function (course) {
+		return course.id !== parseInt(req.params.id);
+	});
+	res.sendStatus(200);
 })
 
 
